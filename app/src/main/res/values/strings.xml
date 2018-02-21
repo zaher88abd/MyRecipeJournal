@@ -11,4 +11,5 @@
     <string name="password_length_message">Please, the password should be at least 6 characters</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_in_wait">Sign in ...</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
