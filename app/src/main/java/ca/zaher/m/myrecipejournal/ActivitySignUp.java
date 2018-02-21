@@ -3,6 +3,7 @@ package ca.zaher.m.myrecipejournal;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.LocationListener;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,12 +38,15 @@ public class ActivitySignUp extends AppCompatActivity {
     private EditText etCPassword;
     private ProgressDialog progressDialog;
     private Button btnSignUp;
+    private Button btnSignIn;
+    private Button btnSignUpShow;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.signup_user);
+        mAuth = FirebaseAuth.getInstance();
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
         etCPassword = findViewById(R.id.et_password_confirm);
@@ -54,6 +58,43 @@ public class ActivitySignUp extends AppCompatActivity {
                 signUp();
             }
         });
+        btnSignIn = findViewById(R.id.btn_signin);
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
+        btnSignUpShow = findViewById(R.id.btn_signup_show);
+        btnSignUpShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnSignUp.setVisibility(View.VISIBLE);
+                btnSignUpShow.setVisibility(View.GONE);
+                etCPassword.setVisibility(View.VISIBLE);
+                btnSignIn.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void signIn() {
+        final String email = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            if (password.length() < 6) {
+                Toast.makeText(this, R.string.password_length_message, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            progressDialog.setMessage(getString(R.string.sign_in_wait));
+            progressDialog.show();
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    Toast.makeText(ActivitySignUp.this, "Welcome, " + email.split("@")[0], Toast.LENGTH_SHORT).show();
+                    backToMainActivity();
+                }
+            });
+        }
     }
 
     public void signUp() {
