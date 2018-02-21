@@ -5,4 +5,8 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up">Sign up</string>
+    <string name="password_not_match">Password is not matching the Confirm Password</string>
+    <string name="error_signup">Please, fill all sections</string>
+    <string name="signup_wiate">Sign up ...</string>
+    <string name="password_length_message">Please, the password should be at least 6 characters</string>
 </resources>
