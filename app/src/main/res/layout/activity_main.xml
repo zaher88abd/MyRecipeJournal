@@ -32,6 +32,6 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_add_black_24dp"
-        android:tint="FFF" />
+        android:tint="@color/colorWhite" />
 
 </RelativeLayout>

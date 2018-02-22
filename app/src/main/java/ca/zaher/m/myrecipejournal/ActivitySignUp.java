@@ -2,8 +2,6 @@ package ca.zaher.m.myrecipejournal;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.location.LocationListener;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,7 +18,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -45,7 +42,7 @@ public class ActivitySignUp extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup_user);
+        setContentView(R.layout.activity_signup_in_user);
         mAuth = FirebaseAuth.getInstance();
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
@@ -110,7 +107,7 @@ public class ActivitySignUp extends AppCompatActivity {
                 Toast.makeText(this, R.string.password_not_match, Toast.LENGTH_LONG).show();
                 return;
             }
-            progressDialog.setMessage(getString(R.string.signup_wiate));
+            progressDialog.setMessage(getString(R.string.signup_waite));
             progressDialog.show();
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
