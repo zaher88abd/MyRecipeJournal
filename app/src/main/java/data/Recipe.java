@@ -10,7 +10,7 @@ import java.util.List;
 public class Recipe {
     private String name;
     private String description;
-    private List<Ingredients> ingredientsList;
+    private List<Ingredient> ingredientsList;
     private String instructions;
 
     public String getName() {
@@ -29,11 +29,11 @@ public class Recipe {
         this.description = description;
     }
 
-    public List<Ingredients> getIngredientsList() {
+    public List<Ingredient> getIngredientsList() {
         return ingredientsList;
     }
 
-    public void setIngredientsList(List<Ingredients> ingredientsList) {
+    public void setIngredientsList(List<Ingredient> ingredientsList) {
         this.ingredientsList = ingredientsList;
     }
 
@@ -45,10 +45,13 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public Recipe(String name, String description, List<Ingredients> ingredientsList, String instructions) {
+    public Recipe(String name, String description, List<Ingredient> ingredientsList, String instructions) {
         this.name = name;
         this.description = description;
         this.ingredientsList = ingredientsList;
         this.instructions = instructions;
+    }
+
+    public Recipe() {
     }
 }

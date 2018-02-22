@@ -4,7 +4,7 @@ package data;
  * Created by zaher on 2018-02-22.
  */
 
-class Ingredients {
+public class Ingredient {
     String material;
     float quantity;
     String measurement;
@@ -33,7 +33,7 @@ class Ingredients {
         this.measurement = measurement;
     }
 
-    public Ingredients(String material, float quantity, String measurement) {
+    public Ingredient(String material, float quantity, String measurement) {
         this.material = material;
         this.quantity = quantity;
         this.measurement = measurement;

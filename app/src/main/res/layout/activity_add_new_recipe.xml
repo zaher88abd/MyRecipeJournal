@@ -54,7 +54,7 @@
                 android:inputType="numberDecimal" />
 
             <Spinner
-                android:id="@+id/et_ingredient_measurement"
+                android:id="@+id/sp_ingredient_measurement"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
@@ -62,6 +62,7 @@
             <android.support.design.widget.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="addIngredient"
                 android:src="@drawable/ic_add_black_24dp"
                 android:tint="@color/colorWhite" />
         </LinearLayout>
