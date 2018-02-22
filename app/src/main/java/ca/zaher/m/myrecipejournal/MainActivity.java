@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null)
                     Toast.makeText(MainActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
                 else {
-                    Intent intent = new Intent(MainActivity.this, ActivitySignUp.class);
+                    Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                     startActivity(intent);
                 }
             }
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             if (user != null)
                 Toast.makeText(MainActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
             else {
-                Intent intent = new Intent(MainActivity.this, ActivitySignUp.class);
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         }
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser == null) {
-            Intent intent = new Intent(this, ActivitySignUp.class);
+            Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         }
     }

@@ -28,7 +28,7 @@ import java.util.HashMap;
  * Created by zaher on 2018-02-21.
  */
 
-public class ActivitySignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText etEmail;
     private EditText etPassword;
@@ -87,7 +87,7 @@ public class ActivitySignUp extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    Toast.makeText(ActivitySignUp.this, "Welcome, " + email.split("@")[0], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Welcome, " + email.split("@")[0], Toast.LENGTH_SHORT).show();
                     backToMainActivity();
                 }
             });
@@ -125,13 +125,13 @@ public class ActivitySignUp extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                 } else {
                                     //user.delete();
-                                    Toast.makeText(ActivitySignUp.this,
+                                    Toast.makeText(SignUpActivity.this,
                                             "Could not add the user to the database", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
                     } else {
-                        Toast.makeText(ActivitySignUp.this,
+                        Toast.makeText(SignUpActivity.this,
                                 "Could not add the user", Toast.LENGTH_SHORT).show();
                         Log.e("Firebase Error", task.getException().toString());
                     }
