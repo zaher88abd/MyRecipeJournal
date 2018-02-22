@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/title"
-        android:title="@string/username"
-        app:showAsAction="always" />
+        android:id="@+id/mi_signIn"
+        android:title="@string/sign_in"
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/signOut"
+        android:id="@+id/mi_signOut"
         android:title="@string/sign_out"
         app:showAsAction="ifRoom" />
 </menu>
