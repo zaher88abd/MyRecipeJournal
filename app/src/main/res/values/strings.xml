@@ -7,9 +7,21 @@
     <string name="sign_up">Sign up</string>
     <string name="password_not_match">Password is not matching the Confirm Password</string>
     <string name="error_signup">Please, fill all sections</string>
-    <string name="signup_wiate">Sign up ...</string>
+    <string name="signup_waite">Sign up …</string>
     <string name="password_length_message">Please, the password should be at least 6 characters</string>
     <string name="sign_in">Sign in</string>
-    <string name="sign_in_wait">Sign in ...</string>
+    <string name="sign_in_wait">Sign in …</string>
     <string name="sign_out">Sign Out</string>
+    <string name="recipe_name">Name</string>
+    <string name="recipe_description">Description</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="recipe_instruction">Instruction</string>
+    <string name="Material">Material</string>
+    <string name="ingredient_quantity">Quantity</string>
+    <string-array name="measurement">
+        <item>small spoon</item>
+        <item>large spoon</item>
+        <item>piece</item>
+    </string-array>
 </resources>
