@@ -3,6 +3,7 @@ package ca.zaher.m.myrecipejournal;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,12 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.net.InetAddress;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser user;
     private Toolbar toolbar;
 
@@ -33,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
         if (user != null) {
             setTitle(user.getEmail().split("@")[0]);
         }
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                //check the user status.
+            }
+        };
         findViewById(R.id.textTV).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +77,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (authStateListener != null) {
+            mAuth.removeAuthStateListener(authStateListener);
+        }
     }
 
     @Override
@@ -77,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
             user = mAuth.getCurrentUser();
             Toast.makeText(this, "SignOut", Toast.LENGTH_SHORT).show();
             setTitle("");
-
         }
         if (item.getItemId() == R.id.mi_signIn && user == null) {
             if (user != null)
