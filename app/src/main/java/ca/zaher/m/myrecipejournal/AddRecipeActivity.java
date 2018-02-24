@@ -1,5 +1,6 @@
 package ca.zaher.m.myrecipejournal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,7 +62,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         EditText etIngredientMaterial = findViewById(R.id.et_ingredient_material);
         EditText etIngredientQuantity = findViewById(R.id.et_ingredient_quantity);
         Spinner spIngredientMeasurement = findViewById(R.id.sp_ingredient_measurement);
-        String ingredient = String.format("%8s %5s %8s\n", etIngredientMaterial.getText().toString()
+        String ingredient = String.format("%-8s %-5s %-8s\n", etIngredientMaterial.getText().toString()
                 , etIngredientQuantity.getText().toString()
                 , spIngredientMeasurement.getSelectedItem().toString());
         ingredient += etIngredients.getText();
@@ -82,8 +84,10 @@ public class AddRecipeActivity extends AppCompatActivity {
         String ingredients = etIngredients.getText().toString();
         for (String ingredientString :
                 ingredients.split("\n")) {
+            String ss = ingredientString.split("( +)")[1];
+            double quantity = Double.parseDouble(ss.trim());
             Ingredient ingredient = new Ingredient(ingredientString.split(" ")[0]
-                    , Float.parseFloat(ingredientString.split(" ")[1]), ingredientString.split(" ")[2]);
+                    , quantity, ingredientString.split(" ")[2]);
             recipe.addIngredients(ingredient);
         }
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -97,7 +101,10 @@ public class AddRecipeActivity extends AppCompatActivity {
         HashMap<String, Recipe> recipeMap = new HashMap();
         recipeMap.put(recipeId, recipe);
         newRecipe.setValue(recipeMap);
+        Toast.makeText(this, R.string.done_save_recipe, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(AddRecipeActivity.this, MainActivity.class));
     }
+
 }
 //https://www.youtube.com/watch?v=ImNs-z872ck
 //http://www.worldbestlearningcenter.com/tips/Android-add-string-array-in-xml-file-to-spinner.htm

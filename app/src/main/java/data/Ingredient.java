@@ -6,7 +6,7 @@ package data;
 
 public class Ingredient {
     String material;
-    float quantity;
+    double quantity;
     String measurement;
 
     public String getMaterial() {
@@ -17,7 +17,7 @@ public class Ingredient {
         this.material = material;
     }
 
-    public float getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
@@ -33,7 +33,7 @@ public class Ingredient {
         this.measurement = measurement;
     }
 
-    public Ingredient(String material, float quantity, String measurement) {
+    public Ingredient(String material, double quantity, String measurement) {
         this.material = material;
         this.quantity = quantity;
         this.measurement = measurement;

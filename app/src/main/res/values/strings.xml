@@ -21,6 +21,7 @@
     <string name="ingredient_quantity">Quantity</string>
     <string name="recipe_ref">recipe</string>
     <string name="user_ref">user</string>
+    <string name="done_save_recipe">Save the recipe</string>
     <string-array name="measurement">
         <item>small spoon</item>
         <item>large spoon</item>
