@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser user;
     private Toolbar toolbar;
+    private FloatingActionButton faBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+        faBtn = findViewById(R.id.addRecipe);
         if (user != null) {
             setTitle(user.getEmail().split("@")[0]);
         }
@@ -47,13 +50,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (user != null)
                     Toast.makeText(MainActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
-                else {
-                    Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                    startActivity(intent);
-                }
+
             }
         });
-
+        faBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddRecipeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

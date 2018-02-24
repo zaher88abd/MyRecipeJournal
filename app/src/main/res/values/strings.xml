@@ -19,6 +19,8 @@
     <string name="recipe_instruction">Instruction</string>
     <string name="Material">Material</string>
     <string name="ingredient_quantity">Quantity</string>
+    <string name="recipe_ref">recipe</string>
+    <string name="user_ref">user</string>
     <string-array name="measurement">
         <item>small spoon</item>
         <item>large spoon</item>

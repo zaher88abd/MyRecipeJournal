@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,8 +34,8 @@ public class Recipe {
         return ingredientsList;
     }
 
-    public void setIngredientsList(List<Ingredient> ingredientsList) {
-        this.ingredientsList = ingredientsList;
+    public void addIngredients(Ingredient ingredient) {
+        this.ingredientsList.add(ingredient);
     }
 
     public String getInstructions() {
@@ -53,5 +54,7 @@ public class Recipe {
     }
 
     public Recipe() {
+        this.ingredientsList = new ArrayList<>();
     }
+
 }

@@ -8,13 +8,13 @@
     android:paddingTop="@dimen/top_padding">
 
     <EditText
-        android:id="@+id/tv_name"
+        android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/recipe_name" />
 
     <EditText
-        android:id="@+id/tv_description"
+        android:id="@+id/et_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/recipe_description"
@@ -78,6 +78,7 @@
         android:scrollbars="vertical" />
 
     <EditText
+        android:id="@+id/et_instruction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/recipe_instruction"
@@ -86,6 +87,7 @@
         android:scrollbars="vertical" />
 
     <Button
+        android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/save_recipe" />
