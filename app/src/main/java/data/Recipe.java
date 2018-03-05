@@ -1,6 +1,10 @@
 package data;
 
+import com.google.firebase.database.Exclude;
+
+import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -9,10 +13,11 @@ import java.util.List;
  */
 
 public class Recipe {
-    private String name;
-    private String description;
-    private List<Ingredient> ingredientsList;
-    private String instructions;
+    public String uid;
+    public String name;
+    public String description;
+    public List<Ingredient> ingredientsList;
+    public String instructions;
 
     public String getName() {
         return name;
@@ -57,4 +62,14 @@ public class Recipe {
         this.ingredientsList = new ArrayList<>();
     }
 
+    @Exclude
+    public HashMap<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("uid", uid);
+        result.put("name", name);
+        result.put("description", description);
+        result.put("instructions", instructions);
+        result.put("ingredientsList", ingredientsList);
+        return result;
+    }
 }

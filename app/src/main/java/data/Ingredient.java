@@ -1,13 +1,18 @@
 package data;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+
 /**
  * Created by zaher on 2018-02-22.
  */
 
 public class Ingredient {
-    String material;
-    double quantity;
-    String measurement;
+    public String uid;
+    public String material;
+    public double quantity;
+    public String measurement;
 
     public String getMaterial() {
         return material;
@@ -38,4 +43,18 @@ public class Ingredient {
         this.quantity = quantity;
         this.measurement = measurement;
     }
+
+    public Ingredient() {
+    }
+
+    @Exclude
+    public HashMap<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("uid", uid);
+        result.put("material", material);
+        result.put("quantity", quantity);
+        result.put("measurement", measurement);
+        return result;
+    }
+
 }
