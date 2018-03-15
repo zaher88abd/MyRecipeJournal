@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import ca.zaher.m.myrecipejournal.R;
@@ -40,7 +41,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_recipe);
         String[] measurement = getResources().getStringArray(R.array.measurement);
         Spinner spIngredientMeasurement = findViewById(R.id.sp_ingredient_measurement);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, measurement);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, measurement);
         spIngredientMeasurement.setAdapter(adapter);
         recipe = new Recipe();
         etName = findViewById(R.id.et_name);
@@ -94,7 +95,8 @@ public class AddRecipeActivity extends AppCompatActivity {
         DatabaseReference userRecipes = firebaseDatabase.getReference()
                 .child(getString(R.string.user_ref))
                 .child(userId).child(getString(R.string.recipe_ref));
-        DatabaseReference newRecipe = userRecipes.push();
+        userRecipes.keepSynced(true);
+            DatabaseReference newRecipe = userRecipes.push();
         newRecipe.setValue(recipe);
         Toast.makeText(this, R.string.done_save_recipe, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(AddRecipeActivity.this, MainActivity.class));

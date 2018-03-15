@@ -2,6 +2,7 @@ package data;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,12 +13,13 @@ import java.util.List;
  * Created by zaher on 2018-02-22.
  */
 
-public class Recipe {
+public class Recipe implements Serializable {
     public String uid;
     public String name;
     public String description;
     public List<Ingredient> ingredientsList;
     public String instructions;
+    public float rating;
 
     public String getName() {
         return name;
@@ -60,6 +62,7 @@ public class Recipe {
 
     public Recipe() {
         this.ingredientsList = new ArrayList<>();
+        rating = 0;
     }
 
     @Exclude

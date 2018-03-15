@@ -2,13 +2,14 @@ package data;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by zaher on 2018-02-22.
  */
 
-public class Ingredient {
+public class Ingredient implements Serializable {
     public String uid;
     public String material;
     public double quantity;

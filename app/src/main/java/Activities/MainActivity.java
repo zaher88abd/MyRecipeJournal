@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapters.RecipesAdapter;
+import Adapters.ViewHolders.RecipeViewHolders;
 import ca.zaher.m.myrecipejournal.R;
 import data.ListRecipes;
 import data.Recipe;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
     private DatabaseReference userDataRef;
     private DatabaseReference userRecipeRef;
     private RecipesAdapter adapter;
-
+    ArrayList<Recipe> recipeArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
         faBtn = findViewById(R.id.addRecipe);
         rvRecipes = findViewById(R.id.rv_recipes_list);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        final ArrayList<Recipe> recipeArrayList = new ArrayList<>();
+        recipeArrayList = new ArrayList<>();
         setSupportActionBar(toolbar);
         if (user != null) {
             setTitle(user.getEmail().split("@")[0]);
@@ -72,15 +73,18 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
                 if (mAuth.getCurrentUser() != null) {
                     userDataRef = firebaseDatabase.getReference().child(getString(R.string.user_ref)).child(mAuth.getCurrentUser().getUid());
                     userRecipeRef = userDataRef.child(getString(R.string.recipe_ref));
+                    userRecipeRef.keepSynced(true);
                     String r = userRecipeRef.toString();
                     Log.e(TAG, r);
 
                     userRecipeRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            recipeArrayList.clear();
                             for (DataSnapshot child :
                                     dataSnapshot.getChildren()) {
                                 Recipe recipe = child.getValue(Recipe.class);
+                                recipe.uid = child.getKey();
                                 recipeArrayList.add(recipe);
                             }
                             adapter.notifyDataSetChanged();
@@ -189,7 +193,9 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
 
     @Override
     public void recyclerViewListClicked(int position) {
-        Toast.makeText(this, "Position" + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, RecipeViewActivity.class);
+        intent.putExtra("recipe", recipeArrayList.get(position));
+        startActivity(intent);
     }
 }
 //https://stackoverflow.com/questions/9570237/android-check-internet-connection
