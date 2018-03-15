@@ -36,7 +36,7 @@ import ca.zaher.m.myrecipejournal.R;
 import data.ListRecipes;
 import data.Recipe;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecipesAdapter.RVClickListener {
     private static final String TAG = "MyRecipeTag";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        adapter = new RecipesAdapter(recipeArrayList, MainActivity.this);
+        adapter = new RecipesAdapter(recipeArrayList, MainActivity.this, this);
         rvRecipes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvRecipes.setAdapter(adapter);
         faBtn.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isNetworkConnected() {
+
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null;
@@ -184,6 +185,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public void recyclerViewListClicked(int position) {
+        Toast.makeText(this, "Position" + position, Toast.LENGTH_SHORT).show();
     }
 }
 //https://stackoverflow.com/questions/9570237/android-check-internet-connection
