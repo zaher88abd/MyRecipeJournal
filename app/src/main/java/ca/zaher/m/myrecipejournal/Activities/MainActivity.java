@@ -1,22 +1,23 @@
-package Activities;
+package ca.zaher.m.myrecipejournal.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,13 +30,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.List;
 
-import Adapters.RecipesAdapter;
-import Adapters.ViewHolders.RecipeViewHolders;
+import ca.zaher.m.myrecipejournal.Adapters.RecipesAdapter;
 import ca.zaher.m.myrecipejournal.R;
-import data.ListRecipes;
-import data.Recipe;
+import ca.zaher.m.myrecipejournal.data.Recipe;
+
 
 public class MainActivity extends AppCompatActivity implements RecipesAdapter.RVClickListener {
     private static final String TAG = "MyRecipeTag";
@@ -71,32 +70,7 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 //check the user status.
                 if (mAuth.getCurrentUser() != null) {
-                    userDataRef = firebaseDatabase.getReference().child(getString(R.string.user_ref)).child(mAuth.getCurrentUser().getUid());
-                    userRecipeRef = userDataRef.child(getString(R.string.recipe_ref));
-                    userRecipeRef.keepSynced(true);
-                    String r = userRecipeRef.toString();
-                    Log.e(TAG, r);
-
-                    userRecipeRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            recipeArrayList.clear();
-                            for (DataSnapshot child :
-                                    dataSnapshot.getChildren()) {
-                                Recipe recipe = child.getValue(Recipe.class);
-                                recipe.uid = child.getKey();
-                                recipeArrayList.add(recipe);
-                            }
-                            adapter.notifyDataSetChanged();
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                    Toast.makeText(MainActivity.this, userDataRef.toString(), Toast.LENGTH_LONG).show();
+                    getUserRecipes();
                 }
             }
         };
@@ -113,22 +87,29 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu, menu);
-        if (user != null) {
-            MenuItem signIn = menu.findItem(R.id.mi_signIn);
-            MenuItem signOut = menu.findItem(R.id.mi_signOut);
-            signIn.setVisible(false);
-            signOut.setVisible(true);
-        } else {
-            MenuItem signIn = menu.findItem(R.id.mi_signIn);
-            MenuItem signOut = menu.findItem(R.id.mi_signOut);
-            signIn.setVisible(true);
-            signOut.setVisible(false);
-        }
-        return true;
+    private void getUserRecipes() {
+        userDataRef = firebaseDatabase.getReference().child(getString(R.string.user_ref)).child(mAuth.getCurrentUser().getUid());
+        userRecipeRef = userDataRef.child(getString(R.string.recipe_ref));
+        userRecipeRef.keepSynced(true);
+        userRecipeRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                recipeArrayList.clear();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Recipe recipe = child.getValue(Recipe.class);
+                    recipe.uid = child.getKey();
+                    recipeArrayList.add(recipe);
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        Toast.makeText(MainActivity.this, userDataRef.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -145,6 +126,71 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
         }
     }
 
+    private SearchView searchView;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+        final MenuItem search = menu.findItem(R.id.action_search);
+        searchView = (SearchView) search.getActionView();
+        searchView.setOnQueryTextListener(onQueryTextListener);
+        // Get the search close button image view
+        View closeButton = searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //handle click
+                Toast.makeText(MainActivity.this, "sdfsdfsdf", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean newViewFocus)
+            {
+                if (!newViewFocus)
+                {
+                    //Collapse the action item.
+                    adapter.refreashData();
+                    search.collapseActionView();
+                }
+            }
+        });
+
+        if (user != null) {
+            MenuItem signIn = menu.findItem(R.id.mi_signIn);
+            MenuItem signOut = menu.findItem(R.id.mi_signOut);
+            signIn.setVisible(false);
+            signOut.setVisible(true);
+        } else {
+            MenuItem signIn = menu.findItem(R.id.mi_signIn);
+            MenuItem signOut = menu.findItem(R.id.mi_signOut);
+            signIn.setVisible(true);
+            signOut.setVisible(false);
+        }
+        return true;
+    }
+
+    private SearchView.OnQueryTextListener onQueryTextListener =
+            new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    if (!newText.isEmpty())
+                        adapter.getFilter().filter(newText);
+                    else
+                        adapter.notifyDataSetChanged();
+                    return true;
+                }
+            };
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.mi_signOut && user != null) {
@@ -152,16 +198,17 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
             user = mAuth.getCurrentUser();
             Toast.makeText(this, "SignOut", Toast.LENGTH_SHORT).show();
             setTitle("");
+            invalidateOptionsMenu();
         }
         if (item.getItemId() == R.id.mi_signIn && user == null) {
-            if (user != null)
+            if (user != null) {
                 Toast.makeText(MainActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
-            else {
+            } else {
                 Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
+            invalidateOptionsMenu();
         }
-        invalidateOptionsMenu();
         return super.onOptionsItemSelected(item);
     }
 

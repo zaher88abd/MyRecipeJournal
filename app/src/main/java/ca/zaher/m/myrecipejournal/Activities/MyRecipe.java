@@ -1,4 +1,4 @@
-package Activities;
+package ca.zaher.m.myrecipejournal.Activities;
 
 import android.app.Application;
 

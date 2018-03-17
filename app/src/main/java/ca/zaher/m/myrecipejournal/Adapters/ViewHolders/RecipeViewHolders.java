@@ -1,13 +1,13 @@
-package Adapters.ViewHolders;
+package ca.zaher.m.myrecipejournal.Adapters.ViewHolders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import Adapters.RecipesAdapter;
+import ca.zaher.m.myrecipejournal.Adapters.RecipesAdapter;
 import ca.zaher.m.myrecipejournal.R;
-import data.Recipe;
+import ca.zaher.m.myrecipejournal.data.Recipe;
 
 /**
  * Created by zaher on 2018-02-24.

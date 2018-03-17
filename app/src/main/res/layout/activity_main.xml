@@ -19,12 +19,8 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark" />
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/textTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/appBarLayout"
-        android:text="Hello World!" />
+
+
 
 
     <android.support.v7.widget.RecyclerView

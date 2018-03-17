@@ -1,31 +1,36 @@
-package Adapters;
+package ca.zaher.m.myrecipejournal.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.Filter;
+import android.widget.Filterable;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import Adapters.ViewHolders.RecipeViewHolders;
+import ca.zaher.m.myrecipejournal.Adapters.ViewHolders.RecipeViewHolders;
 import ca.zaher.m.myrecipejournal.R;
-import data.Recipe;
+import ca.zaher.m.myrecipejournal.data.Recipe;
 
 /**
  * Created by zaher on 2018-02-24.
  */
 
-public class RecipesAdapter extends RecyclerView.Adapter<RecipeViewHolders> {
-    List<Recipe> recipes;
-    Context context;
+public class RecipesAdapter extends RecyclerView.Adapter<RecipeViewHolders> implements Filterable {
+    public ArrayList<Recipe> recipes;
+    private Context context;
     private final RVClickListener rvClickListener;
+    RecipeFilter filter;
+    ArrayList<Recipe> filterList;
 
-    public RecipesAdapter(List<Recipe> recipes, Context context, RVClickListener listener) {
+    public RecipesAdapter(ArrayList<Recipe> recipes, Context context, RVClickListener listener) {
         this.recipes = recipes;
         this.context = context;
-        rvClickListener = listener;
+        this.rvClickListener = listener;
+        this.filterList = recipes;
     }
 
     @Override
@@ -36,7 +41,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipeViewHolders> {
 
     @Override
     public void onBindViewHolder(RecipeViewHolders holder, int position) {
-        ((RecipeViewHolders) holder).bindData(recipes.get(position));
+        holder.bindData(recipes.get(position));
     }
 
     @Override
@@ -44,10 +49,24 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipeViewHolders> {
         return recipes.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        if (filter == null)
+            return filter = new RecipeFilter(filterList, this);
+        return filter;
+    }
+
+    public void refreashData() {
+        recipes.clear();
+        recipes.addAll(filterList);
+        notifyDataSetChanged();
+    }
+
     public interface RVClickListener {
 
-        public void recyclerViewListClicked(int position);
+        void recyclerViewListClicked(int position);
     }
+
 }
 
 

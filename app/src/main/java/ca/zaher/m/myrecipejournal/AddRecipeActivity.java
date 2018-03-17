@@ -11,17 +11,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import data.Ingredient;
-import data.Recipe;
+import ca.zaher.m.myrecipejournal.Activities.MainActivity;
+import ca.zaher.m.myrecipejournal.data.Ingredient;
+import ca.zaher.m.myrecipejournal.data.Recipe;
 
 /**
  * Created by zaher on 2018-02-22.

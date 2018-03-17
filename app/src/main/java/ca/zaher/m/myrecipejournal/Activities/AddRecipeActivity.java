@@ -1,4 +1,4 @@
-package Activities;
+package ca.zaher.m.myrecipejournal.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import ca.zaher.m.myrecipejournal.R;
-import data.Ingredient;
-import data.Recipe;
+import ca.zaher.m.myrecipejournal.data.Ingredient;
+import ca.zaher.m.myrecipejournal.data.Recipe;
 
 /**
  * Created by zaher on 2018-02-22.
@@ -61,9 +58,10 @@ public class AddRecipeActivity extends AppCompatActivity {
         EditText etIngredientMaterial = findViewById(R.id.et_ingredient_material);
         EditText etIngredientQuantity = findViewById(R.id.et_ingredient_quantity);
         Spinner spIngredientMeasurement = findViewById(R.id.sp_ingredient_measurement);
+        String measurement = spIngredientMeasurement.getSelectedItem().toString();
         String ingredient = String.format("%-8s %-5s %-8s\n", etIngredientMaterial.getText().toString()
                 , etIngredientQuantity.getText().toString()
-                , spIngredientMeasurement.getSelectedItem().toString());
+                , measurement);
         ingredient += etIngredients.getText();
         etIngredients.setText(ingredient);
         emptyIngredient();
@@ -85,8 +83,8 @@ public class AddRecipeActivity extends AppCompatActivity {
                 ingredients.split("\n")) {
             String ss = ingredientString.split("( +)")[1];
             double quantity = Double.parseDouble(ss.trim());
-            Ingredient ingredient = new Ingredient(ingredientString.split(" ")[0]
-                    , quantity, ingredientString.split(" ")[2]);
+            Ingredient ingredient = new Ingredient(ingredientString.split("( +)")[0]
+                    , quantity, ingredientString.split("( +)")[2]);
             recipe.addIngredients(ingredient);
         }
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -96,7 +94,9 @@ public class AddRecipeActivity extends AppCompatActivity {
                 .child(getString(R.string.user_ref))
                 .child(userId).child(getString(R.string.recipe_ref));
         userRecipes.keepSynced(true);
-            DatabaseReference newRecipe = userRecipes.push();
+        String uid = userRecipes.getKey();
+        DatabaseReference newRecipe = userRecipes.push();
+        recipe.uid = uid;
         newRecipe.setValue(recipe);
         Toast.makeText(this, R.string.done_save_recipe, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(AddRecipeActivity.this, MainActivity.class));

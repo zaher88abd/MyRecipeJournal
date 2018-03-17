@@ -22,9 +22,10 @@
     <string name="recipe_ref">recipe</string>
     <string name="user_ref">user</string>
     <string name="done_save_recipe">Save the recipe</string>
+    <string name="edit">Edit</string>
     <string-array name="measurement">
-        <item>small spoon</item>
-        <item>large spoon</item>
+        <item>small-spoon</item>
+        <item>large-spoon</item>
         <item>piece</item>
     </string-array>
 </resources>

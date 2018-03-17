@@ -23,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import ca.zaher.m.myrecipejournal.Activities.MainActivity;
+
 /**
  * Sign-up user interface
  * Created by zaher on 2018-02-21.
