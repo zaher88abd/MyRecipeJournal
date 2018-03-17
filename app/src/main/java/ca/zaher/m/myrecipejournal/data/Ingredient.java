@@ -1,4 +1,4 @@
-package data;
+package ca.zaher.m.myrecipejournal.data;
 
 import com.google.firebase.database.Exclude;
 

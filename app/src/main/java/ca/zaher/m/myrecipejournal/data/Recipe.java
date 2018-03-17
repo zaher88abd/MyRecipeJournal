@@ -1,9 +1,8 @@
-package data;
+package ca.zaher.m.myrecipejournal.data;
 
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
