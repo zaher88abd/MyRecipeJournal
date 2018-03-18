@@ -38,6 +38,7 @@ import ca.zaher.m.myrecipejournal.data.Recipe;
 
 public class MainActivity extends AppCompatActivity implements RecipesAdapter.RVClickListener {
     private static final String TAG = "MyRecipeTag";
+    private static final int RECIPE_VEIWER_ACTIVITY = 101;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser user;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddRecipeActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, RECIPE_VEIWER_ACTIVITY);
             }
         });
     }
@@ -109,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
 
             }
         });
-        Toast.makeText(MainActivity.this, userDataRef.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -135,23 +135,11 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
         final MenuItem search = menu.findItem(R.id.action_search);
         searchView = (SearchView) search.getActionView();
         searchView.setOnQueryTextListener(onQueryTextListener);
-        // Get the search close button image view
-        View closeButton = searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //handle click
-                Toast.makeText(MainActivity.this, "sdfsdfsdf", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener()
-        {
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean newViewFocus)
-            {
-                if (!newViewFocus)
-                {
+            public void onFocusChange(View v, boolean newViewFocus) {
+                if (!newViewFocus) {
                     //Collapse the action item.
                     adapter.refreashData();
                     search.collapseActionView();
@@ -239,6 +227,13 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RECIPE_VEIWER_ACTIVITY && resultCode == RESULT_OK) {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     public void recyclerViewListClicked(int position) {
         Intent intent = new Intent(this, RecipeViewActivity.class);
         intent.putExtra("recipe", recipeArrayList.get(position));
@@ -247,3 +242,5 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
 }
 //https://stackoverflow.com/questions/9570237/android-check-internet-connection
 //https://stackoverflow.com/questions/10692755/how-do-i-hide-a-menu-item-in-the-actionbar
+//https://www.camposha.info/android/custom-listview-filter#searchview
+//https://stackoverflow.com/questions/24759502/how-to-handle-back-button-of-search-view-in-android/26334030
