@@ -102,12 +102,9 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
                     recipeArrayList.add(recipe);
                 }
                 adapter.notifyDataSetChanged();
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
@@ -239,8 +236,17 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
         intent.putExtra("recipe", recipeArrayList.get(position));
         startActivity(intent);
     }
+
+    @Override
+    public void recyclerViewListDelete(int position) {
+        userDataRef = firebaseDatabase.getReference().child(getString(R.string.user_ref)).child(mAuth.getCurrentUser().getUid());
+        userRecipeRef = userDataRef.child(getString(R.string.recipe_ref));
+        userRecipeRef.child(adapter.filterList.get(position).uid).removeValue();
+        userRecipeRef.keepSynced(true);
+    }
 }
 //https://stackoverflow.com/questions/9570237/android-check-internet-connection
 //https://stackoverflow.com/questions/10692755/how-do-i-hide-a-menu-item-in-the-actionbar
 //https://www.camposha.info/android/custom-listview-filter#searchview
 //https://stackoverflow.com/questions/24759502/how-to-handle-back-button-of-search-view-in-android/26334030
+//https://stackoverflow.com/questions/36185620/how-to-remove-child-nodes-in-firebase-android/

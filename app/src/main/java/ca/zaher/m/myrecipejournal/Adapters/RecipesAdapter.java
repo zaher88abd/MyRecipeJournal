@@ -24,7 +24,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipeViewHolders> impl
     private Context context;
     private final RVClickListener rvClickListener;
     RecipeFilter filter;
-    ArrayList<Recipe> filterList;
+    public ArrayList<Recipe> filterList;
 
     public RecipesAdapter(ArrayList<Recipe> recipes, Context context, RVClickListener listener) {
         this.recipes = recipes;
@@ -65,6 +65,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipeViewHolders> impl
     public interface RVClickListener {
 
         void recyclerViewListClicked(int position);
+
+        void recyclerViewListDelete(int position);
     }
 
 }
