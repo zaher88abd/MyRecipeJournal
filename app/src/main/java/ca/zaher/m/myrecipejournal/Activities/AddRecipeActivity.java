@@ -56,12 +56,13 @@ public class AddRecipeActivity extends AppCompatActivity {
             }
         });
         Intent receivedIntent = getIntent();
-        String receivedAction = receivedIntent.getAction();
-        if (receivedAction.equals(Intent.ACTION_SEND)) {
-            String receivedText = receivedIntent.getStringExtra(Intent.EXTRA_TEXT);
-            etDescription.setText(receivedText);
-            Log.d(TAG, receivedText);
-        } else if (receivedAction.equals(Intent.ACTION_MAIN)) {
+        if (receivedIntent != null) {
+            String receivedAction = receivedIntent.getAction();
+            if (receivedAction != null && receivedAction.equals(Intent.ACTION_SEND)) {
+                String receivedText = receivedIntent.getStringExtra(Intent.EXTRA_TEXT);
+                etDescription.setText(receivedText);
+                Log.d(TAG, receivedText);
+            }
         }
     }
 

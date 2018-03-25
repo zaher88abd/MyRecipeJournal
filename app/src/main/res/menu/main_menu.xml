@@ -9,10 +9,12 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
     <item
+        android:icon="@drawable/ic_login"
         android:id="@+id/mi_signIn"
         android:title="@string/sign_in"
         app:showAsAction="ifRoom" />
     <item
+        android:icon="@drawable/ic_logout"
         android:id="@+id/mi_signOut"
         android:title="@string/sign_out"
         app:showAsAction="ifRoom" />

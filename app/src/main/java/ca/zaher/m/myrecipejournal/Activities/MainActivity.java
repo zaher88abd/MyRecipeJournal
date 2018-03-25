@@ -152,11 +152,13 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
             MenuItem signOut = menu.findItem(R.id.mi_signOut);
             signIn.setVisible(false);
             signOut.setVisible(true);
+            search.setVisible(true);
         } else {
             MenuItem signIn = menu.findItem(R.id.mi_signIn);
             MenuItem signOut = menu.findItem(R.id.mi_signOut);
             signIn.setVisible(true);
             signOut.setVisible(false);
+            search.setVisible(false);
         }
         return true;
     }
@@ -187,6 +189,8 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
             Toast.makeText(this, "SignOut", Toast.LENGTH_SHORT).show();
             setTitle("");
             invalidateOptionsMenu();
+            recipeArrayList.clear();
+            adapter.notifyDataSetChanged();
         }
         if (item.getItemId() == R.id.mi_signIn && user == null) {
             if (user != null) {

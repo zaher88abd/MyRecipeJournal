@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -19,6 +20,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -30,10 +32,15 @@
             android:id="@+id/tv_recipe_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false" />
+            android:background="@null"
+            android:gravity="center"
+            android:enabled="false"
+            android:textColor="@color/edit_color"
+            android:textSize="25sp" />
 
 
         <RatingBar
+            android:layout_margin="10dp"
             android:id="@+id/rb_recipe_rate"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
@@ -47,9 +54,12 @@
             android:id="@+id/tv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:enabled="false"
             android:inputType="textMultiLine"
-            android:lines="3" />
+            android:lines="3"
+            android:textColor="@color/edit_color"
+            android:textColorHint="@color/colorBlack" />
 
         <EditText
             android:id="@+id/tv_ingredient"
@@ -58,15 +68,20 @@
             android:enabled="false"
             android:inputType="textMultiLine"
             android:lines="4"
-            android:scrollbars="vertical" />
+            android:background="@null"
+            android:scrollbars="vertical"
+            android:textColor="@color/edit_color" />
 
         <EditText
+            android:background="@null"
             android:id="@+id/tv_instruction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="textMultiLine"
             android:lines="7"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:textColor="@color/edit_color"
+            android:textColorHint="@color/colorBlack" />
     </LinearLayout>
 </LinearLayout>

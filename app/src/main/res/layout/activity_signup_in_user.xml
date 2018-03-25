@@ -32,6 +32,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
 
@@ -39,19 +40,28 @@
             android:id="@+id/btn_signin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in" />
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/sign_in"
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:id="@+id/btn_signup_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up" />
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:id="@+id/btn_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimary"
             android:text="@string/sign_up"
+            android:textColor="@color/colorWhite"
             android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>
