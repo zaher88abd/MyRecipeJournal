@@ -1,9 +1,11 @@
 package ca.zaher.m.myrecipejournal.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,13 +20,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import ca.zaher.m.myrecipejournal.R;
 import ca.zaher.m.myrecipejournal.data.Ingredient;
 import ca.zaher.m.myrecipejournal.data.Recipe;
+import ca.zaher.m.myrecipejournal.data.User;
 
 /**
  * Created by zaher on 2018-02-22.
  */
 
 public class AddRecipeActivity extends AppCompatActivity {
-
+    private static final String TAG = "MyRecipeTag";
     private EditText etName;
     private EditText etDescription;
     private EditText etIngredients;
@@ -52,6 +55,14 @@ public class AddRecipeActivity extends AppCompatActivity {
                 saveRecipe();
             }
         });
+        Intent receivedIntent = getIntent();
+        String receivedAction = receivedIntent.getAction();
+        if (receivedAction.equals(Intent.ACTION_SEND)) {
+            String receivedText = receivedIntent.getStringExtra(Intent.EXTRA_TEXT);
+            etDescription.setText(receivedText);
+            Log.d(TAG, receivedText);
+        } else if (receivedAction.equals(Intent.ACTION_MAIN)) {
+        }
     }
 
     public void addIngredient(View view) { // Add new Ingredient to the Edit text
@@ -100,7 +111,14 @@ public class AddRecipeActivity extends AppCompatActivity {
         newRecipe.setValue(recipe);
         Toast.makeText(this, R.string.done_save_recipe, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(AddRecipeActivity.this, MainActivity.class));
+//
+//        Bundle extras = getIntent().getExtras();
+//        String value1 = extras.getString(Intent.EXTRA_TEXT);
+//        Log.d(TAG, value1);
+
+
     }
+
 
 }
 //https://www.youtube.com/watch?v=ImNs-z872ck

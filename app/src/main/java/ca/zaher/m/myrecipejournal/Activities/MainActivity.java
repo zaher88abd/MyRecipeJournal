@@ -37,7 +37,7 @@ import ca.zaher.m.myrecipejournal.data.Recipe;
 
 
 public class MainActivity extends AppCompatActivity implements RecipesAdapter.RVClickListener {
-    private static final String TAG = "MyRecipeTag";
+
     private static final int RECIPE_VEIWER_ACTIVITY = 101;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
                 startActivityForResult(intent, RECIPE_VEIWER_ACTIVITY);
             }
         });
+
+
     }
 
     private void getUserRecipes() {
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
                 }
                 adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
