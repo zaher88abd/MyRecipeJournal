@@ -1,4 +1,4 @@
-package ca.zaher.m.myrecipejournal;
+package ca.zaher.m.myrecipejournal.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-import ca.zaher.m.myrecipejournal.Activities.MainActivity;
+import ca.zaher.m.myrecipejournal.R;
 
 /**
  * Sign-up user interface

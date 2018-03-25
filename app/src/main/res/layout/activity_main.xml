@@ -19,13 +19,27 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark" />
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/textTV"
+
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_recipes_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appBarLayout" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appBarLayout"
-        android:text="Hello World!" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_black_24dp"
+        android:tint="@color/colorWhite" />
 
+</RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_recipes_list"
