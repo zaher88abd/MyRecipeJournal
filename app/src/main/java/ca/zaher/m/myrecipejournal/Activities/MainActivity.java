@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
     public void recyclerViewListClicked(int position) {
         Intent intent = new Intent(this, RecipeViewActivity.class);
         intent.putExtra("recipe", recipeArrayList.get(position));
-        startActivity(intent);
+        startActivityForResult(intent,RECIPE_VEIWER_ACTIVITY);
     }
 
     @Override
