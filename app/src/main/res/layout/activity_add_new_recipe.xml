@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/side_padding"
-    android:paddingRight="@dimen/side_padding"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     android:paddingTop="@dimen/top_padding">
 
     <EditText
@@ -62,10 +62,10 @@
                 android:layout_weight="1" />
 
             <android.support.design.widget.FloatingActionButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick="addIngredient"
+                android:padding="-52dp"
                 android:src="@drawable/ic_add_black_24dp"
                 android:tint="@color/colorWhite" />
         </LinearLayout>
