@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "94326265494",
+    "firebase_url": "https://loyal-world-99522.firebaseio.com",
+    "project_id": "loyal-world-99522",
+    "storage_bucket": "loyal-world-99522.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94326265494:android:49d396b128e7e97c",
+        "android_client_info": {
+          "package_name": "ca.zaher.m.myrecipejournal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94326265494-io68mc7sjan6dgipgfkugpfe2879647c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.zaher.m.myrecipejournal",
+            "certificate_hash": "a928a1bc99ac52a0101a67e730711d8792751957"
+          }
+        },
+        {
+          "client_id": "94326265494-20gdukmlssmelner6dinpn4eu1abi561.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCax1feUobz9d_SWFj6WMAJpA5uVvQXFbY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94326265494-20gdukmlssmelner6dinpn4eu1abi561.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
