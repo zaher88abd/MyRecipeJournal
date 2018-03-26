@@ -252,8 +252,3 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
         userRecipeRef.keepSynced(true);
     }
 }
-//https://stackoverflow.com/questions/9570237/android-check-internet-connection
-//https://stackoverflow.com/questions/10692755/how-do-i-hide-a-menu-item-in-the-actionbar
-//https://www.camposha.info/android/custom-listview-filter#searchview
-//https://stackoverflow.com/questions/24759502/how-to-handle-back-button-of-search-view-in-android/26334030
-//https://stackoverflow.com/questions/36185620/how-to-remove-child-nodes-in-firebase-android/

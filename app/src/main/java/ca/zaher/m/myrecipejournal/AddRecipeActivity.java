@@ -104,5 +104,3 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
 }
-//https://www.youtube.com/watch?v=ImNs-z872ck
-//http://www.worldbestlearningcenter.com/tips/Android-add-string-array-in-xml-file-to-spinner.htm

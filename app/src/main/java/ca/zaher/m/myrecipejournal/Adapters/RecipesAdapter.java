@@ -72,5 +72,3 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipeViewHolders> impl
 }
 
 
-//https://willowtreeapps.com/ideas/android-fundamentals-working-with-the-recyclerview-adapter-and-viewholder-pattern/
-//https://piercezaifman.com/click-listener-for-recyclerview-adapter/

@@ -142,5 +142,4 @@ public class RecipeViewActivity extends AppCompatActivity {
         firebaseDatabase.setValue(recipe);
         firebaseDatabase.keepSynced(true);
     }
-//    https://stackoverflow.com/questions/36185620/how-to-remove-child-nodes-in-firebase-android
 }

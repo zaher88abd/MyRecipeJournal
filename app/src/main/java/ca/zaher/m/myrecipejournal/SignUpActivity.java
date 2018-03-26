@@ -154,4 +154,3 @@ public class SignUpActivity extends AppCompatActivity {
 
 }
 //Referance
-//http://melardev.com/eng/blog/2018/01/02/android-firebase-register-users/
