@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
         user = mAuth.getCurrentUser();
         toolbar = findViewById(R.id.toolBar);
         faBtn = findViewById(R.id.addRecipe);
+        faBtn.setVisibility(View.GONE);
         rvRecipes = findViewById(R.id.rv_recipes_list);
         firebaseDatabase = FirebaseDatabase.getInstance();
         recipeArrayList = new ArrayList<>();
@@ -153,12 +154,15 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
             signIn.setVisible(false);
             signOut.setVisible(true);
             search.setVisible(true);
+            faBtn.setVisibility(View.VISIBLE);
+
         } else {
             MenuItem signIn = menu.findItem(R.id.mi_signIn);
             MenuItem signOut = menu.findItem(R.id.mi_signOut);
             signIn.setVisible(true);
             signOut.setVisible(false);
             search.setVisible(false);
+            faBtn.setVisibility(View.GONE);
         }
         return true;
     }
@@ -234,6 +238,7 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RECIPE_VEIWER_ACTIVITY && resultCode == RESULT_OK) {
             adapter.notifyDataSetChanged();
+            faBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -241,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements RecipesAdapter.RV
     public void recyclerViewListClicked(int position) {
         Intent intent = new Intent(this, RecipeViewActivity.class);
         intent.putExtra("recipe", recipeArrayList.get(position));
-        startActivityForResult(intent,RECIPE_VEIWER_ACTIVITY);
+        startActivityForResult(intent, RECIPE_VEIWER_ACTIVITY);
     }
 
     @Override
